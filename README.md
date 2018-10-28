@@ -1,5 +1,5 @@
 # Sentiment Analytics: Back End
-[![Build Status](https://travis-ci.org/krinj/cits3200-f-backend.svg?branch=master)](https://travis-ci.org/krinj/cits3200-f-backend)
+[![Build Status](https://travis-ci.com/lfp-sentiment-analysis/sa-backend.svg?branch=master)](https://travis-ci.com/lfp-sentiment-analysis/sa-backend)
 
 This is the back-end, serverless application for the Sentiment Analytics app for CITS 3200. The purpose of the App is to receive survey response submissions from Qualtrics, process those responses via the Google Natural Language API, and upload the results to a Google BigQuery table.
 
@@ -18,8 +18,8 @@ This is the back-end, serverless application for the Sentiment Analytics app for
 ## Overview
 
 * The App is serverless, and is hosted on [Google App Engine](https://cloud.google.com/appengine/), Python standard environment.
-* This repository has been set up with automatic deployment via [Travis CI](https://travis-ci.org/krinj/cits3200-f-backend). This means that every push to master should commence a deployment to App Engine.
-* The App's API endpoint can be found here: https://backend-dot-cits-3200.appspot.com/
+* This repository has been set up with automatic deployment via [Travis CI](https://travis-ci.com/lfp-sentiment-analysis/sa-backend). This means that every push to master should commence a deployment to App Engine.
+* The App's API endpoint can be found here: https://backend-dot-learning-for-purpose.appspot.com/
 * The App has a function to submit test data, submit manual data, or submit data extracted from a Qualtrics API. More information on this later.
 
 
@@ -153,7 +153,7 @@ You may modify these fields, and re-commit the repository to change the hard-cod
 In `main.py` you should find these lines near the top:
 
 ```python
-K_PROJECT = "cits-3200"
+K_PROJECT = "learning-for-purpose"
 K_DATASET = "analytics"
 K_TABLE = "responses"
 ```
@@ -180,22 +180,22 @@ Once the App is running, you can basically 'use' it by simply sending a GET or P
 
 #### Index
 
-**Route**: https://backend-dot-cits-3200.appspot.com/
-You can visit this route in the browser just to confirm that the server is live. It should display some text like: `CITS 3200: Backend Server`.
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/
+You can visit this route in the browser just to confirm that the server is live. It should display some text like: `Learning For Purpose Sentiment Analysis: Backend Server`.
 
 #### Test Submit
 
-**Route**: https://backend-dot-cits-3200.appspot.com/test_submit
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/test_submit
 If you visit this URL, or send a`GET` or `POST` request to this route, it will execute a dummy submission with randomized data. The data will still be processed through the actual NLP service on the attached GCP account, as well as uploaded to the connected BigQuery service.
 
 #### Debug
 
-**Route**: https://backend-dot-cits-3200.appspot.com/debug
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/debug
 This route accepts a `POST` request with data specified in the `application/json` format. It will return the same JSON object back as a response.
 
 #### Manual Submit
 
-**Route**: https://backend-dot-cits-3200.appspot.com/manual_submit
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/manual_submit
 This route accepts a `POST` request with data specified in the `application/json` format. You must provide a valid value for each of the JSON keys below for the call to be successful. This could be manually hooked up with the **Qualtrics Survey Flow** to manually send the response data, or perhaps with any other survey system of choice.
 
 The keys that need to be included can be verified in `response_data.py`, but here is a summary.
@@ -222,7 +222,7 @@ If you choose to process the data this way, then it means each distinct question
 
 #### Submit Recent
 
-**Route**: https://backend-dot-cits-3200.appspot.com/submit_recent
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/submit_recent
 This is a `POST`/`GET` request where we can get the server to automatically unpack and submit the latest response from the Qualtrics platform. You must pass in the survey ID as a query for this to work. In the Qualtrics **Survey Flow** you can put this in as a parameter.
 
 ![get_query](images/get_query.png)
@@ -232,25 +232,25 @@ Otherwise, there is the option to use a direct survey id in the URL as well. Thi
 Replace `<SURVEY_ID>` with your own survey ID to process. Replace `<TOKEN>` with your API token.
 
 ```
-https://backend-dot-cits-3200.appspot.com/submit?survey_id=<SURVEY_ID>&token=<TOKEN>
+https://backend-dot-learning-for-purpose.appspot.com/submit?survey_id=<SURVEY_ID>&token=<TOKEN>
 ```
 
 #### Submit Last Hour
 
-**Route**: https://backend-dot-cits-3200.appspot.com/submit_last_hour
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/submit_last_hour
 This route will submit and process *all* of the Qualtrics results from a particular survey from within the last hour. Again, you must pass in the *survey_id* and *token* as variables. For surveys that would receive more responses, it may be beneficial to set up an AppScript or a cron job that can execute this API call once an hour.
 
 ```
-https://backend-dot-cits-3200.appspot.com/submit_last_hour?survey_id=<SURVEY_ID>&token=<TOKEN>
+https://backend-dot-learning-for-purpose.appspot.com/submit_last_hour?survey_id=<SURVEY_ID>&token=<TOKEN>
 ```
 
 #### Submit All
 
-**Route**: https://backend-dot-cits-3200.appspot.com/submit_all
+**Route**: https://backend-dot-learning-for-purpose.appspot.com/submit_all
 This route will scan for all the known responses of a survey, and attempt to submit/process them. This can be used as a last resort or as a fail safe if a server was down, or some data had failed to process.
 
 ```
-https://backend-dot-cits-3200.appspot.com/submit_all?survey_id=<SURVEY_ID>&token=<TOKEN>
+https://backend-dot-learning-for-purpose.appspot.com/submit_all?survey_id=<SURVEY_ID>&token=<TOKEN>
 ```
 
 
