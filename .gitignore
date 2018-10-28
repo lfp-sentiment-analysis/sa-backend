@@ -9,3 +9,5 @@ activate_venv.sh
 # json and downloads
 downloads/*
 cits-3200-abc14d0972cf.json
+
+lfpSecret85a5243a0bd4\.json

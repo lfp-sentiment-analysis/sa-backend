@@ -17,7 +17,7 @@ from google.cloud.language import types
 
 # TODO: maybe not hardcoding the project name and column that has the submission id (response id)
 
-K_PROJECT = "cits-3200"
+K_PROJECT = "learning-for-purpose"
 K_DATASET = "analytics"
 K_TABLE = "responses"
 K_RESPONSE_ID_COLUMN = "submission_id"
@@ -39,7 +39,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "CITS 3200: Backend Server"
+    return "Learning For Purpose Sentiment Analysis: Backend Server"
 
 
 @app.route('/debug', methods=["GET", "POST"])
@@ -75,7 +75,7 @@ def manual_submit():
 
     _process_responses([r_data])
 
-    return "CITS 3200: Manual Submission Endpoint"
+    return "Learning For Purpose Sentiment Analysis: Manual Submission Endpoint"
 
 
 @app.route('/submit_recent', methods=["GET", "POST"])
@@ -83,7 +83,7 @@ def submit_recent():
     survey_id, token, data_center = get_query_parameters(request)
     responses = get_survey_responses(MODE_LAST_RESPONSE, survey_id, token, data_center)
     _process_responses(responses)
-    return "CITS 3200: Submission Endpoint (Process Latest Response)"
+    return "Learning For Purpose Sentiment Analysis: Submission Endpoint (Process Latest Response)"
 
 
 @app.route('/submit_last_hour', methods=["GET", "POST"])
@@ -91,7 +91,7 @@ def submit_last_hour():
     survey_id, token, data_center = get_query_parameters(request)
     responses = get_survey_responses(MODE_HOUR_RESPONSE, survey_id, token, data_center)
     _process_responses(responses)
-    return "CITS 3200: Submission Endpoint (Process Last Hour)"
+    return "Learning For Purpose Sentiment Analysis: Submission Endpoint (Process Last Hour)"
 
 
 @app.route('/submit_all', methods=["GET", "POST"])
@@ -99,7 +99,7 @@ def submit_all():
     survey_id, token, data_center = get_query_parameters(request)
     responses = get_survey_responses(MODE_ALL_RESPONSE, survey_id, token, data_center)
     _process_responses(responses)
-    return "CITS 3200: Submission Endpoint (Process All)"
+    return "Learning For Purpose Sentiment Analysis: Submission Endpoint (Process All)"
 
 
 def get_query_parameters(flask_request) -> (str, str, str):

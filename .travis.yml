@@ -3,8 +3,8 @@ language: python
 python:
 - '3.6'
 before_install:
-- openssl aes-256-cbc -K $encrypted_d51026dfa49b_key -iv $encrypted_d51026dfa49b_iv
-  -in cits-3200-abc14d0972cf.json.enc -out cits-3200-abc14d0972cf.json -d
+- openssl aes-256-cbc -K $encrypted_33a1f872d85b_key -iv $encrypted_33a1f872d85b_iv
+  -in lfpSecret85a5243a0bd4.json.enc -out lfpSecret85a5243a0bd4.json -d
 install:
 - echo "<Ignoring install... Enter install script here>"
 script:
@@ -12,5 +12,5 @@ script:
 deploy:
   provider: gae
   skip_cleanup: true
-  keyfile: cits-3200-abc14d0972cf.json
-  project: cits-3200
+  keyfile: lfpSecret85a5243a0bd4.json
+  project: learning-for-purpose
