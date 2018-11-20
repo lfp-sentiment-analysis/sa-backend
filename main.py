@@ -82,8 +82,12 @@ def manual_submit():
 def submit_recent():
     survey_id, token, data_center = get_query_parameters(request)
     responses = get_survey_responses(MODE_LAST_RESPONSE, survey_id, token, data_center)
+    last_response_tag = "No Responses"
+    if len(responses) > 0:
+        last_response_tag = responses[0].submission_id
     _process_responses(responses)
-    return "Learning For Purpose Sentiment Analysis: Submission Endpoint (Process Latest Response)"
+    return f"Learning For Purpose Sentiment Analysis: " \
+           f"Submission Endpoint (Process Latest Response): {last_response_tag}"
 
 
 @app.route('/submit_last_hour', methods=["GET", "POST"])
