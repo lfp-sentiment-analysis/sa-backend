@@ -78,8 +78,12 @@ def get_survey_responses(
             if q_name[:len(TAG_NLP_RESPONSE)] != TAG_NLP_RESPONSE:
                 continue
 
+            print(f"Looking For Response: {q_name} / {q_id}")
+
             if q_name not in response_dict:
                 continue
+
+            print(f"Processing Response: {q_name} / {q_id}")
 
             r_data = ResponseData()
             r_data.year_of_birth = int(response_dict[TAG_YEAR_OF_BIRTH])
